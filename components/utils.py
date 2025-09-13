@@ -1,9 +1,12 @@
-import re, os, json, pathlib
+import re, os, json, pathlib, logging
 from typing import List, Dict
 from pathlib import Path
 from dotenv import load_dotenv
-import gdown
 import streamlit as st
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def clean_text(text: str) -> str:
     if not text:
@@ -46,11 +49,19 @@ ARTIFACT_URLS = {
 
 def download_from_gdrive(file_id: str, output_path: Path) -> bool:
     """Download a file from Google Drive"""
-    url = f"https://drive.google.com/uc?id={file_id}"
     try:
+        # Import gdown here to handle import errors gracefully
+        import gdown
+        url = f"https://drive.google.com/uc?id={file_id}"
         gdown.download(url, str(output_path), quiet=False)
         return output_path.exists()
+    except ImportError as e:
+        logger.error(f"gdown not installed: {e}")
+        st.error("Missing required package. Installing gdown...")
+        os.system("pip install -q gdown")
+        return False
     except Exception as e:
+        logger.error(f"Download failed: {e}")
         st.error(f"Failed to download: {str(e)}")
         return False
 
@@ -58,6 +69,7 @@ def download_artifacts(art_dir: Path) -> bool:
     """Download required artifacts if they don't exist locally"""
     try:
         art_dir.mkdir(parents=True, exist_ok=True)
+        success = True
         
         for filename, file_id in ARTIFACT_URLS.items():
             filepath = art_dir / filename
@@ -65,21 +77,27 @@ def download_artifacts(art_dir: Path) -> bool:
                 try:
                     with st.spinner(f"📥 Downloading {filename}..."):
                         if not download_from_gdrive(file_id, filepath):
-                            st.error(f"Failed to download {filename}")
+                            logger.error(f"Failed to download {filename}")
+                            success = False
                             continue
+                        logger.info(f"Successfully downloaded {filename}")
                 except Exception as e:
-                    st.error(f"Error downloading {filename}: {str(e)}")
+                    logger.error(f"Error downloading {filename}: {str(e)}")
+                    success = False
                     continue
-                
-        # Check if all required files exist
+        
+        # Verify downloads
         missing_files = [f for f in ARTIFACT_URLS.keys() 
                         if not (art_dir / f).exists()]
         
         if missing_files:
-            st.error(f"Missing required files: {', '.join(missing_files)}")
+            msg = f"Missing required files: {', '.join(missing_files)}"
+            logger.error(msg)
+            st.error(msg)
             return False
             
-        return True
+        return success
     except Exception as e:
+        logger.error(f"Failed to download artifacts: {str(e)}")
         st.error(f"Failed to download artifacts: {str(e)}")
         return False

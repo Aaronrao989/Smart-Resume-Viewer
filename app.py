@@ -8,6 +8,7 @@ import time
 import numpy as np
 
 from components.llm_review import get_backend_info
+from components.utils import download_artifacts
 
 ROOT = Path(__file__).parent.resolve()
 
@@ -122,6 +123,13 @@ st.markdown("""
 
 # Add this line after ART_DIR initialization and before the UI code
 roles = load_roles()  # Initialize roles list
+
+# Add after ART_DIR initialization
+if not ART_DIR.exists() or not any(ART_DIR.iterdir()):
+    st.info("📥 First run - downloading required files...")
+    if not download_artifacts(ART_DIR):
+        st.error("⚠️ Could not download required model files")
+        st.stop()
 
 # Main content in tabs
 tab1, tab2 = st.tabs(["📝 Resume Analysis", "ℹ️ How it Works"])

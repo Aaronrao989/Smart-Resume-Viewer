@@ -1,0 +1,50 @@
+[
+  {
+    "job_position": "Software Engineer",
+    "text": "Develop and maintain scalable applications using Python, Java, and cloud platforms. Collaborate with cross-functional teams to design APIs and optimize performance.",
+    "skills": [
+      "Python",
+      "Java",
+      "APIs",
+      "Cloud",
+      "SQL",
+      "Git"
+    ]
+  },
+  {
+    "job_position": "Data Scientist",
+    "text": "Analyze large datasets to extract insights, build machine learning models, and communicate findings to stakeholders using visualization tools.",
+    "skills": [
+      "Python",
+      "Machine Learning",
+      "Pandas",
+      "scikit-learn",
+      "Statistics",
+      "Data Visualization"
+    ]
+  },
+  {
+    "job_position": "Frontend Developer",
+    "text": "Create interactive and responsive web applications using HTML, CSS, and JavaScript frameworks like React.",
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "UI/UX",
+      "REST APIs"
+    ]
+  },
+  {
+    "job_position": "DevOps Engineer",
+    "text": "Implement CI/CD pipelines, monitor cloud infrastructure, and automate deployments to ensure reliability and scalability.",
+    "skills": [
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "AWS",
+      "Linux",
+      "Terraform"
+    ]
+  }
+]

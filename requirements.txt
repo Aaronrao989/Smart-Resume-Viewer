@@ -1,1 +1,41 @@
 langdetect
+# Core
+pandas
+numpy
+scikit-learn
+scipy
+python-dotenv
+pydantic
+tqdm
+matplotlib
+textstat
+
+# LLM / LangChain (optional backends)
+langchain
+langchain-community
+openai>=1.40.0
+anthropic>=0.34.0
+mistralai>=0.4.0
+
+# Embeddings / Retrieval
+sentence-transformers
+faiss-cpu
+
+# PDF / Parsing
+pdfminer.six
+PyMuPDF
+pdfplumber
+beautifulsoup4
+regex
+
+# Web UI (choose one; Streamlit app provided)
+streamlit
+gradio
+
+# API (optional)
+fastapi
+uvicorn
+
+# Export
+reportlab
+fpdf==2.5.7

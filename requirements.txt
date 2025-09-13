@@ -1,42 +1,27 @@
-langdetect
-# Core
-pandas>=2.0.3
-numpy>=1.24.3
-scikit-learn>=1.3.0
-scipy
-python-dotenv>=1.0.0
-pydantic
-tqdm
-matplotlib
-textstat
+# Core dependencies
+streamlit==1.29.0
+numpy==2.3.3
+pandas==2.2.0
+scikit-learn==1.4.0
+python-dotenv==1.0.0
 
-# LLM / LangChain (optional backends)
-langchain
-langchain-community
-openai>=1.40.0
-anthropic>=0.34.0
-mistralai>=0.4.0
-
-# Embeddings / Retrieval
-sentence-transformers>=2.2.2
-faiss-cpu>=1.7.4
-
-# PDF / Parsing
-pdfminer.six
-PyMuPDF
-pdfplumber
-beautifulsoup4
-regex>=2023.5.5
-
-# Web UI (choose one; Streamlit app provided)
-streamlit>=1.29.0
-gradio
-
-# API (optional)
-fastapi
-uvicorn
-
-# Export
-reportlab
+# PDF handling
 fpdf==2.5.7
-gdown>=4.7.1
+pdfminer.six==20221105
+PyMuPDF==1.21.1
+
+# File downloads
+gdown==4.7.1
+requests==2.31.0
+
+# Text processing
+regex==2023.5.5
+
+# Machine Learning
+faiss-cpu==1.7.4
+sentence-transformers==2.2.2
+torch==2.1.2
+transformers==4.36.2
+
+# LLM
+openai==1.10.0

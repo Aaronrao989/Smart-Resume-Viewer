@@ -1,0 +1,15 @@
+# Python artifacts
+*.pyc
+__pycache__/
+*.pkl
+*.npy
+
+# Virtual environment
+.venv/
+
+# Artifacts folder (optional: ignore all large files)
+artifacts/
+
+# IDE/editor files
+.vscode/
+.idea/

@@ -62,9 +62,23 @@ def download_artifacts(art_dir: Path) -> bool:
         for filename, file_id in ARTIFACT_URLS.items():
             filepath = art_dir / filename
             if not filepath.exists():
-                with st.spinner(f"📥 Downloading {filename}..."):
-                    if not download_from_gdrive(file_id, filepath):
-                        return False
+                try:
+                    with st.spinner(f"📥 Downloading {filename}..."):
+                        if not download_from_gdrive(file_id, filepath):
+                            st.error(f"Failed to download {filename}")
+                            continue
+                except Exception as e:
+                    st.error(f"Error downloading {filename}: {str(e)}")
+                    continue
+                
+        # Check if all required files exist
+        missing_files = [f for f in ARTIFACT_URLS.keys() 
+                        if not (art_dir / f).exists()]
+        
+        if missing_files:
+            st.error(f"Missing required files: {', '.join(missing_files)}")
+            return False
+            
         return True
     except Exception as e:
         st.error(f"Failed to download artifacts: {str(e)}")

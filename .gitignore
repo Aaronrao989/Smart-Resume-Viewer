@@ -13,3 +13,11 @@ artifacts/
 # IDE/editor files
 .vscode/
 .idea/
+*.pyc
+__pycache__/
+
+# Ignore all models except in artifacts
+*.pkl
+*.npy
+!artifacts/*.pkl
+!artifacts/*.npy

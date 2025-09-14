@@ -17,8 +17,8 @@ requests==2.31.0
 gdown==4.7.1
 
 # Machine Learning (CPU only)
-faiss-cpu==1.7.4
+# faiss-cpu==1.7.4   # <-- remove or upgrade
 sentence-transformers==2.2.2
 
 # LLM
-openai==1.0.0
+openai==1.35.10
